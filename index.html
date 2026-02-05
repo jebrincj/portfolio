@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jebrin | Frontend Developer & Web Coder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --card: #0f172a;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    nav a {
+      color: var(--muted);
+      margin-left: 1.25rem;
+      font-size: .9rem;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: .25rem;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #22c55e, #38bdf8);
+      transition: width .2s ease-out;
+    }
+    nav a:hover::after { width: 100%; }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 3rem;
+      align-items: center;
+      padding: 3rem 0 4rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.4);
+      font-size: .75rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      backdrop-filter: blur(18px);
+      background: rgba(15,23,42,.8);
+    }
+    .badge span {
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      margin-right: .4rem;
+      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a 55%, transparent 70%);
+      box-shadow: 0 0 12px #22c55e;
+    }
+    h1 {
+      font-size: clamp(2.5rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin-bottom: .8rem;
+    }
+    .gradient-text {
+      background: linear-gradient(120deg, #07c54a, #e014ad, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: .98rem;
+      max-width: 32rem;
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: .6rem 1.3rem;
+      font-size: .9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: linear-gradient(120deg, #38bdf8, #22c55e);
+      color: #020617;
+      font-weight: 600;
+      transition: transform .12s ease-out, box-shadow .12s ease-out, background .12s ease-out;
+      box-shadow: 0 14px 40px rgba(56,189,248,.35);
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 55px rgba(56,189,248,.45);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: rgba(148,163,184,.6);
+      box-shadow: none;
+    }
+    .btn-secondary:hover {
+      background: rgba(15,23,42,.9);
+      border-color: rgba(148,163,184,.9);
+      transform: translateY(-1px);
+    }
+    .hero-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148,163,184,.4);
+      padding: 1.5rem;
+      background: radial-gradient(circle at top, rgba(56,189,248,.14), rgba(15,23,42,.95));
+      box-shadow: 0 24px 80px rgba(15,23,42,.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,.35), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(168,85,247,.35), transparent 52%);
+      opacity: .7;
+      mix-blend-mode: screen;
+    }
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: 1.4rem;
+      font-size: .75rem;
+    }
+    .pill {
+      padding: .22rem .65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.5);
+      background: rgba(15,23,42,.7);
+      color: var(--muted);
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.4rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2.2rem;
+    }
+    .card {
+      background: rgba(15,23,42,.9);
+      border-radius: 1rem;
+      border: 1px solid rgba(31,41,55,.9);
+      padding: 1.25rem 1.4rem;
+      box-shadow: 0 18px 45px rgba(15,23,42,.9);
+    }
+    .card + .card { margin-top: 1rem; }
+    .muted {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .skill-pill {
+      padding: .4rem .8rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,.9);
+      border: 1px solid rgba(55,65,81,.9);
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.3rem;
+    }
+    .project-card {
+      border-radius: 1rem;
+      border: 1px solid rgba(31,41,55,.9);
+      background: radial-gradient(circle at top, rgba(56,189,248,.09), rgba(15,23,42,.95));
+      padding: 1rem 1.1rem 1.1rem;
+      transition: transform .12s ease-out, box-shadow .12s ease-out, border-color .12s ease-out;
+      cursor: default;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56,189,248,.7);
+      box-shadow: 0 20px 60px rgba(15,23,42,1);
+    }
+    .project-title {
+      font-size: .98rem;
+      margin-bottom: .25rem;
+    }
+    .project-meta {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-bottom: .55rem;
+    }
+    .project-links {
+      margin-top: .7rem;
+      font-size: .8rem;
+    }
+    .project-links a {
+      color: var(--accent);
+      text-decoration: none;
+      margin-right: .7rem;
+    }
+    footer {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(15,23,42,1);
+      color: var(--muted);
+      font-size: .8rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .8rem;
+    }
+    .socials a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: .85rem;
+    }
+    .socials a:hover { color: var(--accent); }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 2.2rem;
+      }
+      .hero-card { order: -1; }
+      .section-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header { padding-inline: 1.1rem; }
+      main { padding-inline: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">JEBRIN</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div>
+        <div class="badge">
+          <span></span>
+          Student • Open to internships & projects
+        </div>
+        <h1>
+          Hi, I'm <span class="gradient-text">Jebrin</span><br />
+          Frontend Developer 
+        </h1>
+        <p class="hero-subtitle">
+          I’m a B.Tech IT student from Kanyakumari who loves building clean,
+          responsive websites and learning modern web technologies with the help of AI tools.
+        </p>
+        <div class="hero-actions">
+          <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+            View my work
+          </button>
+          <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Contact me
+          </button>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-inner">
+          <div class="pill-row">
+            <div class="pill">HTML & CSS</div>
+            <div class="pill">Learning JavaScript</div>
+            <div class="pill">AI-assisted Coding</div>
+            <div class="pill">Future: React & Python</div>
+          </div>
+          <div class="card">
+            <p class="muted">
+              I am currently in my 2nd year B.Tech IT at Nehru Institute of Technology.
+              I enjoy writing clean frontend code, exploring AI tools for coding,
+              and preparing myself for real-world projects and internships.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="section-grid">
+        <div>
+          <div class="card">
+            <p class="muted">
+              I am a frontend developer and web coder from Kanyakumari, India.
+              I enjoy building responsive, user-friendly websites and improving my skills every day.
+              I use tools like Cursor and AI to learn faster and write better code.
+            </p>
+            <p class="muted" style="margin-top:.6rem;">
+              Right now, I am focusing on strengthening my HTML and CSS knowledge,
+              and slowly moving into JavaScript, React, and Python. My goal is to
+              become a strong frontend developer and work on real client projects and internships.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <p class="muted"><strong>Education:</strong> B.Tech Information Technology, 2nd year</p>
+            <p class="muted" style="margin-top:.3rem;">
+              <strong>College:</strong> Nehru Institute of Technology
+            </p>
+            <p class="muted" style="margin-top:.3rem;">
+              <strong>Location:</strong> Kanyakumari, India
+            </p>
+            <p class="muted" style="margin-top:.6rem;">
+              <strong>Interests:</strong> Frontend development, web design, learning React, Python, and JavaScript,
+              and using AI tools to speed up development.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="card">
+        <div class="skills">
+          <span class="skill-pill">HTML5</span>
+          <span class="skill-pill">CSS3</span>
+          <span class="skill-pill">Responsive Web Design</span>
+          <span class="skill-pill">Basic Java</span>
+          <span class="skill-pill">AI-assisted Coding (Cursor)</span>
+          <span class="skill-pill">Learning JavaScript</span>
+          <span class="skill-pill">Learning React</span>
+          <span class="skill-pill">Learning Python</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-meta">Coming Soon</div>
+          <h3 class="project-title">My Future Projects</h3>
+          <p class="muted">
+            I am currently learning and building my skills. Soon I will upload my real projects here,
+            including responsive websites and small applications made with HTML, CSS, JavaScript, and React.
+          </p>
+          <div class="project-links">
+            <!-- You can add GitHub and live links later -->
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p class="muted">
+          If you want to connect, discuss opportunities, or just say hi, feel free to reach out.
+          I am open to internships, beginner-friendly projects, and collaboration where I can learn and contribute.
+        </p>
+        <p class="muted" style="margin-top:.6rem;">
+          <strong>Email:</strong> <a href="mailto:jebrincj2007@gmail.com" style="color:#38bdf8;text-decoration:none;">
+            jebrincj2007@gmail.com
+          </a><br />
+           <strong>Phone:</strong>
+      <a href="tel:+919677302544" style="color:#38bdf8;text-decoration:none;">
+        +91-9677302544
+      </a><br />
+          <strong>Location:</strong> Kanyakumari, India
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Jebrin. All rights reserved.</span>
+    <div class="socials">
+      <!-- Add real links when you create them -->
+      <!-- Example:
+      <a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/your-username" target="_blank" rel="noreferrer">LinkedIn</a>
+      -->
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
